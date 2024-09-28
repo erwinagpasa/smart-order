@@ -30,6 +30,17 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+        <Stack.Screen
+          name="modal/signin"
+          options={{
+            headerBackTitleVisible: false,
+            headerShown: true,
+            presentation: 'modal',
+            title: 'Paywall',
+          }}
+        />
+
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

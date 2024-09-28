@@ -1,36 +1,25 @@
-import { Image, StyleSheet, Platform, Text, View, TouchableOpacity } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import NfcManager, { NfcTech } from 'react-native-nfc-manager';
-
-// Pre-step, call this before any NFC operations
-NfcManager.start();
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import { router } from 'expo-router';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function HomeScreen() {
-
-  async function readNdef() {
-    try {
-      // register for the NFC tag with NDEF in it
-      await NfcManager.requestTechnology(NfcTech.Ndef);
-      // the resolved tag object will contain `ndefMessage` property
-      const tag = await NfcManager.getTag();
-      console.warn('Tag found', tag);
-    } catch (ex) {
-      console.warn('Oops!', ex);
-    } finally {
-      // stop the nfc scanning
-      NfcManager.cancelTechnologyRequest();
-    }
-  }
+  const status = 'Free';
+  const walletCount = 1;
+  const userId = 1;
 
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity onPress={readNdef}>
-        <Text>Scan a Tag</Text>
+
+
+      <TouchableOpacity onPress={() => router.push({
+        pathname: '/modal/signin',
+        params: { userId: userId }
+      })} className="bg-[#0083FF] py-3 px-6 rounded-md flex flex-row justify-center">
+        <Text className="text-center text-white text-base mr-3">Apple Payment</Text>
+        <FontAwesome name="apple" size={24} color="white" />
       </TouchableOpacity>
+
+
     </View>
   );
 }
@@ -40,5 +29,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#007bff',
+    padding: 10,
+    borderRadius: 20,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
