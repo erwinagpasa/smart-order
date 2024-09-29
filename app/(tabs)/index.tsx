@@ -15,8 +15,7 @@ export default function HomeScreen() {
         pathname: '/modal/signin',
         params: { userId: userId }
       })} className="bg-[#0083FF] py-3 px-6 rounded-md flex flex-row justify-center">
-        <Text className="text-center text-white text-base mr-3">Apple Payment</Text>
-        <FontAwesome name="apple" size={24} color="white" />
+        <Text className="text-center text-white text-base mr-3">Authorize the user</Text>
       </TouchableOpacity>
 
 

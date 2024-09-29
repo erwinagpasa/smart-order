@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useLocalSearchParams } from 'expo-router';
 import NfcManager, { NfcTech } from 'react-native-nfc-manager';
@@ -33,8 +33,18 @@ export default function Paywall() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
       <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>user: {userId}</Text>
-        <Text className='text-lg' style={{ textAlign: 'center' }}>NFC ID: {tagId}</Text>
+
+
+        {tagId ? (
+          <Text style={{ textAlign: 'center', fontSize: 24 }}>STAFF ID: {tagId}</Text>
+        ) : (
+          <View>
+            <Image source={require('@/assets/images/reader.gif')} className="w-[200px] h-[200px]" style={{ alignSelf: 'center' }} />
+            <Text style={{ textAlign: 'center' }}>Ready to Scan</Text>
+          </View>
+        )}
+
+
       </View>
     </SafeAreaView>
   );
@@ -43,7 +53,7 @@ export default function Paywall() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: '#fff',
   },
   container: {
     flex: 1,
